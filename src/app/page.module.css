@@ -1,4 +1,6 @@
 .main {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
   background-color: #000;
 }
 
