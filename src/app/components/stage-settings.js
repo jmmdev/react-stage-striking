@@ -25,12 +25,14 @@ export default function StageSettings({stages, active, setActive, setShowSetting
                     {
                         stages.map(stage => {
                             const isActive = active.includes(stage.index);
-                            <div className={styles.setting} key={stage.index}>
-                                <p>{stage.name}</p>
-                                <button style={{backgroundColor: isActive ? '#00cc66' : '#666', justifyContent: isActive ? 'flex-end' : 'flex-start'}} onClick={() => updateActive(stage.index)}>
-                                    <div className={styles.thumb}/>
-                                </button>
-                            </div>
+                            return (
+                                <div className={styles.setting} key={stage.index}>
+                                    <p>{stage.name}</p>
+                                    <button style={{backgroundColor: isActive ? '#00cc66' : '#666', justifyContent: isActive ? 'flex-end' : 'flex-start'}} onClick={() => updateActive(stage.index)}>
+                                        <div className={styles.thumb}/>
+                                    </button>
+                                </div>
+                            )
                         })
                     }
                 </div>

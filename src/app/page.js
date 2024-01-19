@@ -8,7 +8,7 @@ import Stages from './components/stages'
 import StageSettings from './components/stage-settings';
 
 export const getStages = async () => {
-    const res = await fetch('https://files/stages.json', {cache: 'force-cache'})
+    const res = await fetch('files/stages.json', {cache: 'force-cache'})
     const stage_data = await res.json() 
 
     return stage_data
