@@ -131,14 +131,13 @@
 
 .settings {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: #222233;
   border-radius: 8px;
-  padding: 8px 8px 24px 8px;
-  gap: 16px;
+  padding: 8px 8px 8px 8px;
 }
 
 .top {
@@ -149,8 +148,7 @@
 
 .toggles {
   display: flex;
-  flex-wrap: wrap;
-  row-gap: 32px;
+  flex-direction: column;
   padding: 0 16px;
 }
 
@@ -170,17 +168,20 @@
 
 .setting {
   display: flex;
-  flex-direction: column;
+  width: 100%;
   align-items: center;
-  width: 33%;
   justify-content: space-between;
+  padding: 8px 0;
+}
+
+.setting:not(:last-child) {
+  border-bottom: 1px solid #ddf4;
 }
 
 .setting p {
   font-size: 16px;
   font-weight: 500;
   color: white;
-  margin-bottom: 8px;
   text-align: center;
 }
 
