@@ -17,7 +17,7 @@ export const getStages = async () => {
 export default function Home() {
   const [stages, setStages] = useState([])
   const [banned, setBanned] = useState([])
-  const [active, setActive] = useState([])  
+  const [active, setActive] = useState([0,1,2,3,4,5,6,7,10])  
   const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
