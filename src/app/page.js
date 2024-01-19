@@ -1,95 +1,50 @@
+'use client';
+import { useEffect, useState } from 'react'
+import { MdRestartAlt, MdSettings } from 'react-icons/md'
 import Image from 'next/image'
+
 import styles from './page.module.css'
+import Stages from './components/stages'
+import StageSettings from './components/stage-settings';
 
 export default function Home() {
+  const [stages, setStages] = useState([])
+  const [banned, setBanned] = useState([])
+  const [active, setActive] = useState([0,1,2,3,4,5,6,7,10])  
+  const [showSettings, setShowSettings] = useState(false)
+
+  useEffect(() => {
+    fetch('/files/stages.json').then(response => {
+        response.json().then(stages_data => {
+            setStages(stages_data)
+        })
+    });
+  }, [])
+
+  const Settings = () => {
+    if (showSettings) {
+      return (
+        <StageSettings stages={stages} active={active} setActive={setActive} setShowSettings={setShowSettings} />
+      )
+    }
+    return null;
+  }
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+      <div className={styles.logo}>
+        <Image fill src={`/assets/logo.svg`} alt='Logo'/>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <Stages stages={stages} banned={banned} setBanned={setBanned} active={active}/>
+      <div className={styles.buttons}>
+          <button className={styles.button} onClick={() => setBanned([])}>
+              <MdRestartAlt fontSize={36}/>
+          </button>
+          <button className={styles.button} onClick={() => setShowSettings(true)}>
+              <MdSettings fontSize={36}/>
+          </button>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <Settings />
     </main>
   )
 }
