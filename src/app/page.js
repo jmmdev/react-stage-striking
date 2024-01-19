@@ -40,7 +40,7 @@ export default function Home() {
   const RestartButton = () => {
     if (active.length > 0) {
       return (
-        <button className={styles.button} onTouchStart={() => {}} onTouchEnd={() => setBanned([])}>
+        <button className={styles.button} onClick={() => setBanned([])}>
           <MdRestartAlt fontSize={36}/>
         </button>
       )
@@ -56,7 +56,7 @@ export default function Home() {
       <Stages stages={stages} banned={banned} setBanned={setBanned} active={active}/>
       <div className={styles.buttons}>
         <RestartButton />
-        <button className={styles.button} onTouchStart={() => {}} onTouchEnd={() => setShowSettings(true)}>
+        <button className={styles.button} onClick={() => setShowSettings(true)}>
           <MdSettings fontSize={36}/>
         </button>
       </div>
