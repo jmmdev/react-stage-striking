@@ -126,7 +126,8 @@
   justify-content: center;
   background-color: #000d;
   overflow: hidden;
-  padding: 16px 16px 16px max(calc(100vw - 100%), 16px)
+  padding: 16px 16px 16px max(calc(100vw - 100%), 16px);
+  z-index: 999;
 }
 
 .settings {
