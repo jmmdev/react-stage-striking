@@ -18,13 +18,10 @@ export default function Stages({stages, banned, setBanned, active}) {
                 {
                     stages.map(stage => {
                         if (active.includes(stage.index)) {
-                            return (
-                                <button className={styles.stage} style={{opacity: banned.includes(stage.index) ? 0.25 : 1}} onClick={() => updateBanned(stage.index)} key={stage.index}>
-                                    <Image fill={true} src={`/assets/${stage.index}.jpg`} alt={stage.name}/>
-                                </button>
-                            )
+                            <button className={styles.stage} style={{opacity: banned.includes(stage.index) ? 0.25 : 1}} onClick={() => updateBanned(stage.index)} key={stage.index}>
+                                <Image fill={true} src={`/assets/${stage.index}.jpg`} alt={stage.name}/>
+                            </button>
                         }
-                        return null;
                     })
                 }
             </div>
