@@ -1,7 +1,5 @@
 import Image from 'next/image'
 import styles from '../page.module.css'
-import { useState } from 'react'
-import StageSettings from './stage-settings'
 
 export default function Stages({stages, banned, setBanned, active}) {
     const updateBanned = index => {
