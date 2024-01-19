@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d .next/static/chunks"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "14.0.4",
@@ -21,6 +19,5 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "gh-pages": "^6.1.1"
-  },
-  "homepage": "https://jmmdev.github.io/react-stage-striking"
+  }
 }
