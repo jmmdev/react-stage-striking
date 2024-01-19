@@ -56,7 +56,10 @@ export default function Home() {
       <Stages stages={stages} banned={banned} setBanned={setBanned} active={active}/>
       <div className={styles.buttons}>
         <RestartButton />
-        <button className={styles.button} onClick={() => setShowSettings(true)}>
+        <button className={styles.button} onClick={() => {
+          setShowSettings(true)
+          document.documentElement.style.overflowY = 'hidden'
+          }}>
           <MdSettings fontSize={36}/>
         </button>
       </div>

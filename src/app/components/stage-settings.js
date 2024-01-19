@@ -17,7 +17,10 @@ export default function StageSettings({stages, active, setActive, setShowSetting
         <div className={styles.fixed}>
             <div className={styles.settings}>
                 <div className={styles.top}>
-                    <button className={styles.close} onClick={() => setShowSettings(false)}>
+                    <button className={styles.close} onClick={() => {
+                        setShowSettings(false)
+                        document.documentElement.style.overflowY = 'auto'
+                    }}>
                         <MdClose fontSize={24}/>
                     </button>
                 </div>
