@@ -48,6 +48,35 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.empty {
+  width: max(50%, 400px);
+  min-height: 150px;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.empty p {
+  opacity: 0.75;
+  text-align: center;
+}
+
+.arrow {
+  opacity: 0.5;
+  animation-name: arrow-highlight;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes arrow-highlight {
+  0% {opacity: 0.5;}
+  12.5% {opacity: 1;}
+  37.5% {opacity: 1;}
+  100% {opacity: 0.5;}
+}
+
 .banned {
   opacity: 25%;
 }

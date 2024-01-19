@@ -17,7 +17,7 @@ export const getStages = async () => {
 export default function Home() {
   const [stages, setStages] = useState([])
   const [banned, setBanned] = useState([])
-  const [active, setActive] = useState([0,1,2,3,4,5,6,7,10])  
+  const [active, setActive] = useState([])  
   const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
@@ -37,6 +37,17 @@ export default function Home() {
     return null;
   }
 
+  const RestartButton = () => {
+    if (active.length > 0) {
+      return (
+        <button className={styles.button} onClick={() => setBanned([])}>
+          <MdRestartAlt fontSize={36}/>
+        </button>
+      )
+    }
+    return null
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.logo}>
@@ -44,12 +55,10 @@ export default function Home() {
       </div>
       <Stages stages={stages} banned={banned} setBanned={setBanned} active={active}/>
       <div className={styles.buttons}>
-          <button className={styles.button} onClick={() => setBanned([])}>
-              <MdRestartAlt fontSize={36}/>
-          </button>
-          <button className={styles.button} onClick={() => setShowSettings(true)}>
-              <MdSettings fontSize={36}/>
-          </button>
+        <RestartButton />
+        <button className={styles.button} onClick={() => setShowSettings(true)}>
+          <MdSettings fontSize={36}/>
+        </button>
       </div>
       <Settings />
     </main>
