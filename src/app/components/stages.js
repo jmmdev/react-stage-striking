@@ -35,7 +35,12 @@ export default function Stages({stages, banned, setBanned, active, language}) {
         } else {
             return (
                 <div className="flex flex-col gap-8 items-center max-w-md leading-relaxed text-center text-2xl text-zinc-100 p-4">
-                    <p>Your stages should load shortly, if you don&apos;t see any, please check the stage settings menu</p>
+                    <p>
+                    {language === "en"
+                        ? "Your stages should load shortly, if you don't see any, please check the stage settings menu."
+                        : "Los escenarios cargarán en breve, si no los ves, comprueba los ajustes de escenarios."
+                    }
+                    </p>
                     <FiChevronDown className="text-7xl animate-bounce"/>
                 </div>
             )
