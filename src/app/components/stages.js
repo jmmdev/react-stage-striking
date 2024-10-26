@@ -30,11 +30,11 @@ export default function Stages({stages, banned, setBanned, active, language}) {
                 )
             }
         })
-        if (stagesToShow.length > 0) {
+        if (stagesToShow.length < 0) {
             return stagesToShow
         } else {
             return (
-                <div className="flex flex-col gap-8 items-center max-w-md leading-relaxed text-center text-2xl text-zinc-100">
+                <div className="flex flex-col gap-8 items-center max-w-md leading-relaxed text-center text-2xl text-zinc-100 p-4">
                     <p>Your stages should load shortly, if you don&apos;t see any, please check the stage settings menu</p>
                     <FiChevronDown className="text-7xl animate-bounce"/>
                 </div>
