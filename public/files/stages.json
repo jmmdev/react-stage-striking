@@ -1,46 +1,46 @@
 [
     {
       "index": 0,
-      "name": "Battlefield"
+      "name": {"en": "Battlefield", "es": "Campo de Batalla"}
     },
     {
       "index": 1,
-      "name": "Small Battlefield"
+      "name": {"en": "Small Battlefield", "es": "Pequeño Campo de Batalla"}
     },
     {
       "index": 2,
-      "name": "Final Destination"
+      "name": {"en": "Final Destination", "es": "Destino Final"}
     },
     {
       "index": 3,
-      "name": "Pokémon Stadium 2"
+      "name": {"en": "Pokémon Stadium 2", "es": "Estadio Pokémon 2"}
     },
     {
       "index": 4,
-      "name": "Smashville"
+      "name": {"en": "Smashville", "es": "Pueblo Smash"}
     },
     {
       "index": 5,
-      "name": "Town & City"
+      "name": {"en": "Town & City", "es": "Sobrevolando el Pueblo"}
     },
     {
       "index": 6,
-      "name": "Hollow Bastion"
+      "name": {"en": "Hollow Bastion", "es": "Bastión Hueco"}
     },
     {
       "index": 7,
-      "name": "Kalos Pokémon League"
+      "name": {"en": "Kalos Pokémon League", "es": "Liga Pokémon de Kalos"}
     },
     {
       "index": 8,
-      "name": "Northern Cave"
+      "name": {"en": "Yoshi's Story", "es": "Yoshi's Story"}
     },
     {
       "index": 9,
-      "name": "Lylat Cruise"
+      "name": {"en": "Lylat Cruise", "es": "Sistema Lylat"}
     },
     {
       "index": 10,
-      "name": "Yoshi's Story"
+      "name": {"en": "Northern Cave", "es": "Cueva del Norte"}
     }
   ]

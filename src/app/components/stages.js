@@ -1,9 +1,8 @@
 import Image from 'next/image'
-import styles from '../page.module.css'
-import { MdArrowDownward } from "react-icons/md";
+import { FiChevronDown } from "react-icons/fi";
 
 
-export default function Stages({stages, banned, setBanned, active}) {
+export default function Stages({stages, banned, setBanned, active, language}) {
     const updateBanned = index => {
         const bannedSet = new Set([...banned])
         if (bannedSet.has(index)) {
@@ -19,9 +18,15 @@ export default function Stages({stages, banned, setBanned, active}) {
         stages.map(stage => {
             if (active.includes(stage.index)) {
                 stagesToShow.push(
-                    <button className={styles.stage} style={{opacity: banned.includes(stage.index) ? 0.25 : 1}} onClick={() => updateBanned(stage.index)} key={stage.index}>
-                        <Image fill={true} src={`/assets/${stage.index}.jpg`} alt={stage.name}/>
-                    </button>
+                    <div className="w-1/2 sm:w-1/3 lg:w-1/4 aspect-video text-center">
+                        <button className={"w-full h-full p-1.5 hover:bg-zinc-100"} onClick={() => updateBanned(stage.index)} key={stage.index}>
+                            <div className="relative w-full h-full">
+                                <Image fill src={`/assets/${stage.index}.jpg`} alt={stage.name[language]} />
+                                <div className={`absolute w-full h-full bg-black/75 ${banned.includes(stage.index) ? "" : "hidden"}`} />
+                            </div>
+                        </button>
+                        <p className="truncate font-bold lg:text-lg xl:text-xl text-zinc-100 mt-0.5 mb-1.5">{stage.name[language]}</p>
+                    </div>
                 )
             }
         })
@@ -29,21 +34,17 @@ export default function Stages({stages, banned, setBanned, active}) {
             return stagesToShow
         } else {
             return (
-                <div className={styles.empty}>
-                    <p style={{fontWeight: 600, fontSize: 32}}>PLEASE, SELECT SOME STAGES IN THE SETTINGS MENU</p>
-                    <div className={styles.arrow}>
-                        <MdArrowDownward fontSize={72} color='#fff'/>
-                    </div>
+                <div className="flex flex-col gap-8 items-center max-w-md leading-relaxed text-center text-2xl text-zinc-100">
+                    <p>Your stages should load shortly, if you don&apos;t see any, please check the stage settings menu</p>
+                    <FiChevronDown className="text-7xl animate-bounce"/>
                 </div>
             )
         }
     }
 
     return (
-        <div>
-            <div className={styles.stages}>
-                <ShowStages />
-            </div>
+        <div className="flex flex-wrap justify-center">
+            <ShowStages />
         </div>
   )
 }
