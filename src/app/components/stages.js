@@ -30,7 +30,7 @@ export default function Stages({stages, banned, setBanned, active, language}) {
                 )
             }
         })
-        if (stagesToShow.length < 0) {
+        if (stagesToShow.length > 0) {
             return stagesToShow
         } else {
             return (
