@@ -15,7 +15,7 @@ export default function StageSettings({stages, active, setActive, setShowSetting
 
     return (
         <div className="fixed flex justify-center items-center w-screen h-screen top-0 left-0 bg-black/80 p-8">
-            <div className="max-h-full lg:max-h-full bg-slate-600 rounded-xl overflow-y-auto">
+            <div className="w-full sm:w-fit max-h-96 lg:max-h-full bg-slate-600 rounded-xl overflow-y-auto">
                 <div className="sticky top-0 z-50 flex justify-between items-center p-4 bg-slate-700 backdrop-blur-lg">
                     <p className="sm:text-xl font-bold text-slate-200">{language === "en" ? "Stage selection" : "Selección de escenarios"}</p>
                     <button className="text-2xl sm:text-3xl self-end text-slate-300 hover:text-slate-300 active:text-zinc-100" onClick={() => {
