@@ -16,6 +16,7 @@ export default function Home() {
     fetch("/files/stages.json")
       .then(response => response.json())
         .then(json => {
+          console.log(json);
           return json;
         })
         .catch(e => alert("Stages could not be loaded. Please refresh and try again."))
@@ -25,7 +26,6 @@ export default function Home() {
   useEffect(() => {
     function initialize() {
       const stage_data = getStages();
-      console.log(stage_data);
       const savedBanned = localStorage.getItem("rss_banned_stages");
       const savedActive = localStorage.getItem("rss_active_stages");
 
