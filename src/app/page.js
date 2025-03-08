@@ -6,15 +6,11 @@ import StageSettings from './components/stage-settings';
 import { ReactCountryFlag } from 'react-country-flag';
 
 export default function Home() {
-  const localBanned = localStorage.getItem("rss_banned_stages") || [];
-  const localActive = localStorage.getItem("rss_active_stages") || [0,1,2,3,4,5,6,7,8];
-  const localLanguage = localStorage.getItem("rss_language") || "en";
-
-  const [stages, setStages] = useState([]);
-  const [banned, setBanned] = useState(localBanned);
-  const [active, setActive] = useState(localActive);  
-  const [showSettings, setShowSettings] = useState(false);
-  const [language, setLanguage] = useState(localLanguage);
+  const [stages, setStages] = useState([])
+  const [banned, setBanned] = useState([])
+  const [active, setActive] = useState([0,1,2,3,4,5,6,7,8])  
+  const [showSettings, setShowSettings] = useState(false)
+  const [language, setLanguage] = useState('en');
 
   async function getStages() {
     try {
@@ -29,6 +25,14 @@ export default function Home() {
   useEffect(() => {
     async function initialize() {
       const stage_data = await getStages();
+      const savedBanned = localStorage.getItem("rss_banned_stages");
+      const savedActive = localStorage.getItem("rss_active_stages");
+
+      if (savedBanned)
+        setBanned(JSON.parse(savedBanned));
+
+      if (savedActive)
+        setActive(JSON.parse(savedActive));
       
       if (stage_data)
         setStages(stage_data);
