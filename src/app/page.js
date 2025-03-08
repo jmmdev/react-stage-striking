@@ -12,9 +12,19 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false)
   const [language, setLanguage] = useState('en');
 
+  function getStages() {
+    fetch("/files/stages.json")
+      .then(response => response.json())
+        .then(json => {
+          return json;
+        })
+        .catch(e => alert("Stages could not be loaded. Please refresh and try again."))
+      .catch(e => alert("Stages could not be loaded. Please refresh and try again."));
+  }
+
   useEffect(() => {
-    const initialize = async () => {
-      const stage_data = await getStages();
+    function initialize() {
+      const stage_data = getStages();
       const savedBanned = localStorage.getItem("rss_banned_stages");
       const savedActive = localStorage.getItem("rss_active_stages");
 
