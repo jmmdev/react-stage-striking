@@ -25,6 +25,7 @@ export default function Home() {
   useEffect(() => {
     function initialize() {
       const stage_data = getStages();
+      console.log(stage_data);
       const savedBanned = localStorage.getItem("rss_banned_stages");
       const savedActive = localStorage.getItem("rss_active_stages");
 
