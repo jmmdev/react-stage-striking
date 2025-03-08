@@ -18,10 +18,10 @@ export default function Stages({stages, banned, setBanned, active, language}) {
         stages.map(stage => {
             if (active.includes(stage.index)) {
                 stagesToShow.push(
-                    <div className="w-1/2 sm:w-1/3 lg:w-1/4 aspect-video text-center">
+                    <div key={stage.name[language]} className="w-1/2 sm:w-1/3 lg:w-1/4 aspect-video text-center">
                         <button className={"w-full h-full p-1.5 hover:bg-zinc-100"} onClick={() => updateBanned(stage.index)} key={stage.index}>
                             <div className="relative w-full h-full">
-                                <Image fill src={`/assets/${stage.index}.webp`} alt={stage.name[language]} />
+                                <Image fill sizes="200" src={`/assets/${stage.index}.webp`} alt={stage.name[language]} />
                                 <div className={`absolute w-full h-full bg-black/75 ${banned.includes(stage.index) ? "" : "hidden"}`} />
                             </div>
                         </button>

@@ -6,36 +6,32 @@ import StageSettings from './components/stage-settings';
 import { ReactCountryFlag } from 'react-country-flag';
 
 export default function Home() {
-  const [stages, setStages] = useState([])
-  const [banned, setBanned] = useState([])
-  const [active, setActive] = useState([0,1,2,3,4,5,6,7,8])  
-  const [showSettings, setShowSettings] = useState(false)
-  const [language, setLanguage] = useState('en');
+  const localBanned = localStorage.getItem("rss_banned_stages") || [];
+  const localActive = localStorage.getItem("rss_active_stages") || [0,1,2,3,4,5,6,7,8];
+  const localLanguage = localStorage.getItem("rss_language") || "en";
 
-  function getStages() {
-    fetch("/files/stages.json")
-      .then(response => response.json())
-        .then(json => {
-          console.log(json);
-          return json;
-        })
-        .catch(e => alert("Stages could not be loaded. Please refresh and try again."))
-      .catch(e => alert("Stages could not be loaded. Please refresh and try again."));
+  const [stages, setStages] = useState([]);
+  const [banned, setBanned] = useState(localBanned);
+  const [active, setActive] = useState(localActive);  
+  const [showSettings, setShowSettings] = useState(false);
+  const [language, setLanguage] = useState(localLanguage);
+
+  async function getStages() {
+    try {
+      const response = await fetch("/files/stages.json");
+      const json = await response.json();
+      return json;
+    } catch (e) {
+      alert("Stages could not be loaded. Please refresh and try again.");
+    }
   }
 
   useEffect(() => {
-    function initialize() {
-      const stage_data = getStages();
-      const savedBanned = localStorage.getItem("rss_banned_stages");
-      const savedActive = localStorage.getItem("rss_active_stages");
-
-      if (savedBanned)
-        setBanned(JSON.parse(savedBanned));
-
-      if (savedActive)
-        setActive(JSON.parse(savedActive));
+    async function initialize() {
+      const stage_data = await getStages();
       
-      setStages(stage_data);
+      if (stage_data)
+        setStages(stage_data);
     }
     initialize()
   }, [])
@@ -48,6 +44,11 @@ export default function Home() {
   function activeHandler(value) {
     localStorage.setItem("rss_active_stages", JSON.stringify(value));
     setActive(value);
+  }
+
+  function languageHandler(value) {
+    localStorage.setItem("rss_language", value);
+    setLanguage(value);
   }
 
   const MyButton = ({content, action}) => {
@@ -66,15 +67,15 @@ export default function Home() {
           <p className="text-sm font-bold">Super Smash Bros. Ultimate</p>
         </div>
         <div className="flex gap-2 text-2xl h-fit mt-4 sm:mt-0">
-          <button className="flex" disabled={language === "en"} onClick={() => setLanguage("en")}>
+          <button className="flex" disabled={language === "en"} onClick={() => languageHandler("en")}>
             <ReactCountryFlag className={`${language === 'es' ? "hover:opacity-100 opacity-50" : ""} leading-6`} countryCode="GB" svg/>
           </button>
-          <button className="flex" disabled={language === "es"} onClick={() => setLanguage("es")}>
+          <button className="flex" disabled={language === "es"} onClick={() => languageHandler("es")}>
             <ReactCountryFlag className={`${language === 'en' ? "hover:opacity-100 opacity-50" : ""} leading-6`} countryCode="ES" svg/>
           </button>
         </div>
       </header>
-      <Stages stages={stages} banned={banned} setBanned={bannedHandler} active={active} language={language} />
+        <Stages stages={stages} banned={banned} setBanned={bannedHandler} active={active} language={language} />
       <div className="flex gap-4 text-4xl text-zinc-100 self-center">
         {active.length > 0 &&
         <MyButton content={<MdRestartAlt />} action={() => bannedHandler([])} />
