@@ -25,15 +25,19 @@ export default function Home() {
   useEffect(() => {
     async function initialize() {
       const stage_data = await getStages();
-      const savedBanned = localStorage.getItem("rss_banned_stages");
-      const savedActive = localStorage.getItem("rss_active_stages");
+      const localBanned = localStorage.getItem("rss_banned_stages");
+      const localActive = localStorage.getItem("rss_active_stages");
+      const localLanguage = localStorage.getItem("rss_language");
 
-      if (savedBanned)
-        setBanned(JSON.parse(savedBanned));
+      if (localBanned)
+        setBanned(JSON.parse(localBanned));
 
-      if (savedActive)
-        setActive(JSON.parse(savedActive));
+      if (localActive)
+        setActive(JSON.parse(localActive));
       
+      if (localLanguage)
+        setLanguage(localLanguage);
+
       if (stage_data)
         setStages(stage_data);
     }
