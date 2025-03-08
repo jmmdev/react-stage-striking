@@ -5,13 +5,6 @@ import Stages from './components/stages'
 import StageSettings from './components/stage-settings';
 import { ReactCountryFlag } from 'react-country-flag';
 
-export const getStages = async () => {
-    const res = await fetch('files/stages.json')
-    const stage_data = await res.json() 
-
-    return stage_data
-}
-
 export default function Home() {
   const [stages, setStages] = useState([])
   const [banned, setBanned] = useState([])
@@ -21,11 +14,30 @@ export default function Home() {
 
   useEffect(() => {
     const initialize = async () => {
-      const stage_data = await getStages()
-      setStages(stage_data)
+      const stage_data = await getStages();
+      const savedBanned = localStorage.getItem("rss_banned_stages");
+      const savedActive = localStorage.getItem("rss_active_stages");
+
+      if (savedBanned)
+        setBanned(JSON.parse(savedBanned));
+
+      if (savedActive)
+        setActive(JSON.parse(savedActive));
+      
+      setStages(stage_data);
     }
     initialize()
   }, [])
+
+  function bannedHandler(value) {
+    localStorage.setItem("rss_banned_stages", JSON.stringify(value));
+    setBanned(value);
+  }
+
+  function activeHandler(value) {
+    localStorage.setItem("rss_active_stages", JSON.stringify(value));
+    setActive(value);
+  }
 
   const MyButton = ({content, action}) => {
     return (
@@ -51,10 +63,10 @@ export default function Home() {
           </button>
         </div>
       </header>
-      <Stages stages={stages} banned={banned} setBanned={setBanned} active={active} language={language} />
+      <Stages stages={stages} banned={banned} setBanned={bannedHandler} active={active} language={language} />
       <div className="flex gap-4 text-4xl text-zinc-100 self-center">
         {active.length > 0 &&
-        <MyButton content={<MdRestartAlt />} action={() => setBanned([])} />
+        <MyButton content={<MdRestartAlt />} action={() => bannedHandler([])} />
         }
         <MyButton content={<MdSettings />} action={() => {
           setShowSettings(true);
@@ -62,7 +74,7 @@ export default function Home() {
         }} />
       </div>
       {showSettings &&
-        <StageSettings stages={stages} active={active} setActive={setActive} setShowSettings={setShowSettings} language={language} />
+        <StageSettings stages={stages} active={active} setActive={activeHandler} setShowSettings={setShowSettings} language={language} />
       }
     </div>
   )
